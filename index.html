@@ -40,17 +40,8 @@
             font-size: 2.5rem;
             font-weight: 600;
             color: #4a5d4e;
-            margin-bottom: 8px;
+            margin-bottom: 30px; /* Mezera mezi jmény a puzzle */
             letter-spacing: 1px;
-        }
-
-        .subtitle {
-            font-size: 0.95rem;
-            color: #666666;
-            /* Zvětšená mezora pod textem (původně 25px) */
-            margin-bottom: 35px;
-            font-weight: 300;
-            transition: opacity 0.4s ease;
         }
 
         /* Styl pro puzzle mřížku (2x2) */
@@ -60,8 +51,7 @@
             grid-template-rows: repeat(2, 140px);
             gap: 4px;
             justify-content: center;
-            /* Zvětšená mezera pod puzzle (původně 25px) */
-            margin: 0 auto 35px auto;
+            margin: 0 auto 25px auto; /* Mezera pod puzzle */
             width: 284px;
             height: 284px;
             background-color: #f9f9f9;
@@ -87,6 +77,14 @@
         .puzzle-piece.selected {
             border-color: #8ab092;
             transform: scale(0.96);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #666666;
+            margin-bottom: 30px; /* Mezera mezi textem a tlačítkem */
+            font-weight: 300;
+            transition: opacity 0.4s ease;
         }
 
         /* Tlačítko po složení */
@@ -123,15 +121,17 @@
     <div class="card-container">
         <!-- Nápisy -->
         <h1>Lenka & Patrik</h1>
-        <p class="subtitle" id="subtitle-text">Složte puzzle a odhalte tajemství</p>
 
-        <!-- Puzzle mřížka -->
+        <!-- Puzzle mřížka (teď hned pod jmény) -->
         <div class="puzzle-board" id="board">
             <div class="puzzle-piece" data-correct="0"></div>
             <div class="puzzle-piece" data-correct="1"></div>
             <div class="puzzle-piece" data-correct="2"></div>
             <div class="puzzle-piece" data-correct="3"></div>
         </div>
+
+        <!-- Text je nyní až pod puzzle -->
+        <p class="subtitle" id="subtitle-text">Složte puzzle a odhalte tajemství</p>
 
         <!-- Tlačítko pro další kroky -->
         <a href="#dalsi-info" id="btn-more" class="info-button">Pro další informace klikněte sem</a>
@@ -159,6 +159,19 @@
             return array;
         }
 
+        // Pojistka: zkontroluje, zda je stav vzdálený od výhry jen 1 prohození
+        function isOneSwapAway(arr) {
+            let mismatched = [];
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i] !== i) mismatched.push(i);
+            }
+            if (mismatched.length === 2) {
+                let [a, b] = mismatched;
+                if (arr[a] === b && arr[b] === a) return true;
+            }
+            return false;
+        }
+
         function initPuzzle() {
             pieces.forEach(piece => {
                 const correctIdx = parseInt(piece.dataset.correct);
@@ -168,7 +181,10 @@
             let currentOrder = [0, 1, 2, 3];
             do {
                 shuffle(currentOrder);
-            } while (currentOrder.every((val, index) => val === index));
+            } while (
+                currentOrder.every((val, index) => val === index) || 
+                isOneSwapAway(currentOrder)
+            );
 
             currentOrder.forEach(idx => {
                 board.appendChild(pieces[idx]);
@@ -210,27 +226,28 @@
                     p.style.cursor = 'default';
                 });
 
-                // Změna textu nad puzzle po úspěšném složení
+                // Změna textu pod puzzle po úspěšném složení
                 const subtitle = document.getElementById('subtitle-text');
                 subtitle.style.opacity = 0;
                 setTimeout(() => {
-                    subtitle.textContent = "Zasnoubili jsme se a srdečně vás zveme na naši svatbu!";
+                    subtitle.textContent = "Srdečně vás zveme na naši svatbu!";
                     subtitle.style.opacity = 1;
                 }, 300);
 
-                // Spuštění konfet
+                // Spuštění konfet (prodloužené)
                 launchConfetti();
 
-                // Zobrazení tlačítka
+                // Zobrazení tlačítka (s prodlevou 2.5s)
                 setTimeout(() => {
                     document.getElementById('btn-more').classList.add('visible');
-                }, 1200);
+                }, 2500);
             }
         }
 
         function launchConfetti() {
             const eucalyptusColors = ['#5c7462', '#8ab092', '#c3d5c5', '#ffffff', '#d1d5d1', '#9fa8a0'];
             
+            // 1. Vlna
             confetti({
                 particleCount: 60,
                 spread: 70,
@@ -239,6 +256,7 @@
                 shapes: ['square']
             });
 
+            // 2. Vlna
             setTimeout(() => {
                 confetti({
                     particleCount: 40,
@@ -256,7 +274,18 @@
                     colors: eucalyptusColors,
                     shapes: ['square']
                 });
-            }, 300);
+            }, 400);
+
+            // 3. Vlna (závěrečný déšť)
+            setTimeout(() => {
+                confetti({
+                    particleCount: 50,
+                    spread: 100,
+                    origin: { y: 0.3 },
+                    colors: eucalyptusColors,
+                    shapes: ['square']
+                });
+            }, 1200);
         }
 
         initPuzzle();
