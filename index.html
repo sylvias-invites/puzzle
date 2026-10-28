@@ -47,8 +47,10 @@
         .subtitle {
             font-size: 0.95rem;
             color: #666666;
-            margin-bottom: 25px;
+            /* Zvětšená mezora pod textem (původně 25px) */
+            margin-bottom: 35px;
             font-weight: 300;
+            transition: opacity 0.4s ease;
         }
 
         /* Styl pro puzzle mřížku (2x2) */
@@ -58,7 +60,8 @@
             grid-template-rows: repeat(2, 140px);
             gap: 4px;
             justify-content: center;
-            margin: 0 auto 25px auto;
+            /* Zvětšená mezera pod puzzle (původně 25px) */
+            margin: 0 auto 35px auto;
             width: 284px;
             height: 284px;
             background-color: #f9f9f9;
@@ -120,7 +123,7 @@
     <div class="card-container">
         <!-- Nápisy -->
         <h1>Lenka & Patrik</h1>
-        <p class="subtitle">Složte puzzle a odhalte tajemství</p>
+        <p class="subtitle" id="subtitle-text">Složte puzzle a odhalte tajemství</p>
 
         <!-- Puzzle mřížka -->
         <div class="puzzle-board" id="board">
@@ -146,7 +149,6 @@
         const board = document.getElementById('board');
         let selectedPiece = null;
 
-        // Funkce pro promíchání pole
         function shuffle(array) {
             let currentIndex = array.length, randomIndex;
             while (currentIndex !== 0) {
@@ -157,7 +159,6 @@
             return array;
         }
 
-        // Inicializace pozic obrázku a zamíchání dílků
         function initPuzzle() {
             pieces.forEach(piece => {
                 const correctIdx = parseInt(piece.dataset.correct);
@@ -174,7 +175,6 @@
             });
         }
 
-        // Mechanika výběru a prohození dvou dílků
         pieces.forEach(piece => {
             piece.addEventListener('click', () => {
                 if (!selectedPiece) {
@@ -196,7 +196,6 @@
             });
         });
 
-        // Kontrola, zda jsou dílky ve správném pořadí
         function checkWin() {
             const currentPieces = Array.from(board.children);
             const isSolved = currentPieces.every((piece, index) => {
@@ -211,15 +210,24 @@
                     p.style.cursor = 'default';
                 });
 
+                // Změna textu nad puzzle po úspěšném složení
+                const subtitle = document.getElementById('subtitle-text');
+                subtitle.style.opacity = 0;
+                setTimeout(() => {
+                    subtitle.textContent = "Zasnoubili jsme se a srdečně vás zveme na naši svatbu!";
+                    subtitle.style.opacity = 1;
+                }, 300);
+
+                // Spuštění konfet
                 launchConfetti();
 
+                // Zobrazení tlačítka
                 setTimeout(() => {
                     document.getElementById('btn-more').classList.add('visible');
                 }, 1200);
             }
         }
 
-        // Funkce pro konfety
         function launchConfetti() {
             const eucalyptusColors = ['#5c7462', '#8ab092', '#c3d5c5', '#ffffff', '#d1d5d1', '#9fa8a0'];
             
