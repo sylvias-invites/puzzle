@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Svatební pozvánka - Lenka & Patrik</title>
+    <!-- Načtení knihovny pro konfety -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Google Fonts pro elegantní písmo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            color: #333333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .card-container {
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            background: #ffffff;
+            padding: 30px 20px;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #4a5d4e; /* Jemná eukalyptová barva pro nadpis */
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: #666666;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        /* Styl pro puzzle mřížku (2x2) */
+        .puzzle-board {
+            display: grid;
+            grid-template-columns: repeat(2, 140px);
+            grid-template-rows: repeat(2, 140px);
+            gap: 4px;
+            justify-content: center;
+            margin: 0 auto 25px auto;
+            width: 284px;
+            height: 284px;
+        }
+
+        .puzzle-piece {
+            width: 140px;
+            height: 140px;
+            cursor: pointer;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            border: 2px solid transparent;
+            
+            /* Načtení lokálního obrázku z repozitáře */
+            background-image: url('snoubenci.png');
+            background-size: 280px 280px; /* Dvojnásobek velikosti dílku pro 2x2 */
+        }
+
+        /* Zvýraznění vybraného dílku před prohozením */
+        .puzzle-piece.selected {
+            border-color: #8ab092;
+            transform: scale(0.96);
+        }
+
+        /* Tlačítko po složení */
+        .info-button {
+            display: inline-block;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease, transform 0.3s ease;
+            transform: translateY(10px);
+            background-color: #5c7462; /* Eukalyptově zelená */
+            color: #ffffff;
+            padding: 14px 24px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(92, 116, 98, 0.25);
+        }
+
+        .info-button.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .info-button:hover {
+            background-color: #4a5d4e;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        <!-- Nápisy -->
+        <h1>Lenka & Patrik</h1>
+        <p class="subtitle">Složte puzzle a odhalte tajemství</p>
+
+        <!-- Puzzle mřížka -->
+        <div
