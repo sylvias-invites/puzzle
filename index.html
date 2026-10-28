@@ -39,7 +39,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 2.5rem;
             font-weight: 600;
-            color: #4a5d4e; /* Jemná eukalyptová barva pro nadpis */
+            color: #4a5d4e;
             margin-bottom: 8px;
             letter-spacing: 1px;
         }
@@ -61,6 +61,8 @@
             margin: 0 auto 25px auto;
             width: 284px;
             height: 284px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
         }
 
         .puzzle-piece {
@@ -72,9 +74,10 @@
             transition: transform 0.2s ease, border-color 0.2s ease;
             border: 2px solid transparent;
             
-            /* Načtení lokálního obrázku z repozitáře */
+            /* Přímý odkaz na tvůj obrázek na GitHubu */
             background-image: url('https://raw.githubusercontent.com/sylvias-invites/puzzle/main/snoubenci.png');
-            background-size: 280px 280px; /* Dvojnásobek velikosti dílku pro 2x2 */
+            background-size: 280px 280px;
+            background-repeat: no-repeat;
         }
 
         /* Zvýraznění vybraného dílku před prohozením */
@@ -90,7 +93,7 @@
             pointer-events: none;
             transition: opacity 0.8s ease, transform 0.3s ease;
             transform: translateY(10px);
-            background-color: #5c7462; /* Eukalyptově zelená */
+            background-color: #5c7462;
             color: #ffffff;
             padding: 14px 24px;
             text-decoration: none;
@@ -120,4 +123,135 @@
         <p class="subtitle">Složte puzzle a odhalte tajemství</p>
 
         <!-- Puzzle mřížka -->
-        <div
+        <div class="puzzle-board" id="board">
+            <div class="puzzle-piece" data-correct="0"></div>
+            <div class="puzzle-piece" data-correct="1"></div>
+            <div class="puzzle-piece" data-correct="2"></div>
+            <div class="puzzle-piece" data-correct="3"></div>
+        </div>
+
+        <!-- Tlačítko pro další kroky -->
+        <a href="#dalsi-info" id="btn-more" class="info-button">Pro další informace klikněte sem</a>
+    </div>
+
+    <script>
+        const bgPositions = [
+            '0px 0px',         // Levý horní
+            '-140px 0px',      // Pravý horní
+            '0px -140px',      // Levý dolní
+            '-140px -140px'    // Pravý dolní
+        ];
+
+        const pieces = Array.from(document.querySelectorAll('.puzzle-piece'));
+        const board = document.getElementById('board');
+        let selectedPiece = null;
+
+        // Funkce pro promíchání pole
+        function shuffle(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        // Inicializace pozic obrázku a zamíchání dílků
+        function initPuzzle() {
+            pieces.forEach(piece => {
+                const correctIdx = parseInt(piece.dataset.correct);
+                piece.style.backgroundPosition = bgPositions[correctIdx];
+            });
+
+            let currentOrder = [0, 1, 2, 3];
+            do {
+                shuffle(currentOrder);
+            } while (currentOrder.every((val, index) => val === index));
+
+            currentOrder.forEach(idx => {
+                board.appendChild(pieces[idx]);
+            });
+        }
+
+        // Mechanika výběru a prohození dvou dílků
+        pieces.forEach(piece => {
+            piece.addEventListener('click', () => {
+                if (!selectedPiece) {
+                    selectedPiece = piece;
+                    piece.classList.add('selected');
+                } else if (selectedPiece === piece) {
+                    piece.classList.remove('selected');
+                    selectedPiece = null;
+                } else {
+                    const nextOfFirst = selectedPiece.nextSibling === piece ? selectedPiece : selectedPiece.nextSibling;
+                    board.insertBefore(selectedPiece, piece);
+                    board.insertBefore(piece, nextOfFirst);
+
+                    selectedPiece.classList.remove('selected');
+                    selectedPiece = null;
+
+                    checkWin();
+                }
+            });
+        });
+
+        // Kontrola, zda jsou dílky ve správném pořadí
+        function checkWin() {
+            const currentPieces = Array.from(board.children);
+            const isSolved = currentPieces.every((piece, index) => {
+                return parseInt(piece.dataset.correct) === index;
+            });
+
+            if (isSolved) {
+                board.style.gap = '0px';
+                currentPieces.forEach(p => {
+                    p.style.border = 'none';
+                    p.style.borderRadius = '0';
+                    p.style.cursor = 'default';
+                });
+
+                launchConfetti();
+
+                setTimeout(() => {
+                    document.getElementById('btn-more').classList.add('visible');
+                }, 1200);
+            }
+        }
+
+        // Funkce pro konfety
+        function launchConfetti() {
+            const eucalyptusColors = ['#5c7462', '#8ab092', '#c3d5c5', '#ffffff', '#d1d5d1', '#9fa8a0'];
+            
+            confetti({
+                particleCount: 60,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: eucalyptusColors,
+                shapes: ['square']
+            });
+
+            setTimeout(() => {
+                confetti({
+                    particleCount: 40,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: eucalyptusColors,
+                    shapes: ['square']
+                });
+                confetti({
+                    particleCount: 40,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: eucalyptusColors,
+                    shapes: ['square']
+                });
+            }, 300);
+        }
+
+        initPuzzle();
+    </script>
+</body>
+</html>
