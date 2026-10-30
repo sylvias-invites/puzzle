@@ -7,7 +7,7 @@
     <!-- Načtení knihovny pro konfety -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <!-- Google Fonts pro elegantní písmo -->
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -33,6 +33,12 @@
             text-align: center;
             background: #ffffff;
             padding: 30px 20px;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Skrytí stránky */
+        .hidden {
+            display: none !important;
         }
 
         h1 {
@@ -40,7 +46,7 @@
             font-size: 2.5rem;
             font-weight: 600;
             color: #4a5d4e;
-            margin-bottom: 30px; /* Mezera mezi jmény a puzzle */
+            margin-bottom: 30px;
             letter-spacing: 1px;
         }
 
@@ -51,7 +57,7 @@
             grid-template-rows: repeat(2, 140px);
             gap: 4px;
             justify-content: center;
-            margin: 0 auto 25px auto; /* Mezera pod puzzle */
+            margin: 0 auto 25px auto;
             width: 284px;
             height: 284px;
             background-color: #f9f9f9;
@@ -66,14 +72,11 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
             transition: transform 0.2s ease, border-color 0.2s ease;
             border: 2px solid transparent;
-            
-            /* Přímý odkaz na tvůj obrázek na GitHubu */
             background-image: url('https://raw.githubusercontent.com/sylvias-invites/puzzle/main/snoubenci.png');
             background-size: 280px 280px;
             background-repeat: no-repeat;
         }
 
-        /* Zvýraznění vybraného dílku před prohozením */
         .puzzle-piece.selected {
             border-color: #8ab092;
             transform: scale(0.96);
@@ -82,19 +85,18 @@
         .subtitle {
             font-size: 1.1rem;
             color: #666666;
-            margin-bottom: 30px; /* Mezera mezi textem a tlačítkem */
+            margin-bottom: 30px;
             font-weight: 300;
-            transition: opacity 0.4s ease;
+            transition: opacity 0.4s ease, font-size 0.3s ease;
         }
 
         .subtitle.solved {
-    font-size: 1.5rem; /* Zvětšené písmo (původní bylo 1.1rem) */
-    font-weight: 500;  /* Volitelně: mírně tučnější pro lepší čitelnost */
-    color: #4a5d4e;    /* Volitelně: ladící barva do zelena jako nadpis */
-       }
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #4a5d4e;
+        }
 
-
-        /* Tlačítko po složení */
+        /* Tlačítka */
         .info-button {
             display: inline-block;
             opacity: 0;
@@ -110,6 +112,8 @@
             font-weight: 500;
             letter-spacing: 0.5px;
             box-shadow: 0 4px 12px rgba(92, 116, 98, 0.25);
+            cursor: pointer;
+            border: none;
         }
 
         .info-button.visible {
@@ -121,15 +125,161 @@
         .info-button:hover {
             background-color: #4a5d4e;
         }
+
+        /* =================STYLY PRO DRUHOU STRÁNKU================= */
+        .details-container {
+            width: 100%;
+            max-width: 450px;
+            background: #ffffff;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .details-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.3rem;
+            color: #4a5d4e;
+            margin-bottom: 5px;
+        }
+
+        .wedding-date {
+            font-size: 1.1rem;
+            color: #666666;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+
+        /* Odpočet */
+        .countdown-box {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .countdown-item {
+            background: #f4f7f4;
+            padding: 12px 15px;
+            border-radius: 8px;
+            min-width: 70px;
+            border: 1px solid #e2ebe3;
+        }
+
+        .countdown-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #4a5d4e;
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 0.75rem;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Sekce obsahu */
+        .section-block {
+            margin-bottom: 30px;
+            text-align: left;
+            background: #fcfdfc;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #edf2ee;
+        }
+
+        .section-block h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: #4a5d4e;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #e2ebe3;
+            padding-bottom: 5px;
+            text-align: center;
+        }
+
+        .program-list {
+            list-style: none;
+            font-size: 0.95rem;
+            color: #555555;
+        }
+
+        .program-list li {
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .program-time {
+            font-weight: 600;
+            color: #5c7462;
+        }
+
+        .gifts-text {
+            font-size: 0.95rem;
+            color: #555555;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        /* RSVP Formulář */
+        .rsvp-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .rsvp-form input, .rsvp-form select {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #d5e1d7;
+            border-radius: 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            background: #ffffff;
+            color: #333333;
+        }
+
+        .rsvp-form input:focus, .rsvp-form select:focus {
+            outline: none;
+            border-color: #5c7462;
+        }
+
+        .rsvp-submit {
+            background-color: #5c7462;
+            color: #ffffff;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 0.95rem;
+            margin-top: 5px;
+        }
+
+        .rsvp-submit:hover {
+            background-color: #4a5d4e;
+        }
+
+        .rsvp-success {
+            display: none;
+            color: #4a5d4e;
+            font-weight: 500;
+            text-align: center;
+            padding: 10px;
+        }
     </style>
 </head>
 <body>
 
-    <div class="card-container">
-        <!-- Nápisy -->
+    <!-- ================= 1. STRÁNKA: ÚVOD A PUZZLE ================= -->
+    <div class="card-container" id="page-puzzle">
         <h1>Lenka & Patrik</h1>
 
-        <!-- Puzzle mřížka (teď hned pod jmény) -->
         <div class="puzzle-board" id="board">
             <div class="puzzle-piece" data-correct="0"></div>
             <div class="puzzle-piece" data-correct="1"></div>
@@ -137,19 +287,82 @@
             <div class="puzzle-piece" data-correct="3"></div>
         </div>
 
-        <!-- Text je nyní až pod puzzle -->
         <p class="subtitle" id="subtitle-text">Slož puzzle a odhal tajemství</p>
 
-        <!-- Tlačítko pro další kroky -->
-        <a href="#dalsi-info" id="btn-more" class="info-button">Pro další informace klikněte sem</a>
+        <!-- Tlačítko pro přechod na další stránku -->
+        <button id="btn-more" class="info-button" onclick="goToDetails()">Pro další informace klikněte sem</button>
     </div>
 
+
+    <!-- ================= 2. STRÁNKA: DETAILY SVATBY ================= -->
+    <div class="details-container hidden" id="page-details">
+        <div class="details-header">
+            <h2>Lenka & Patrik</h2>
+            <div class="wedding-date">17. 09. 2027</div>
+        </div>
+
+        <!-- Odpočet -->
+        <div class="countdown-box">
+            <div class="countdown-item">
+                <span class="countdown-number" id="days">00</span>
+                <span class="countdown-label">Dní</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="hours">00</span>
+                <span class="countdown-label">Hodin</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="minutes">00</span>
+                <span class="countdown-label">Minut</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="seconds">00</span>
+                <span class="countdown-label">Vteřin</span>
+            </div>
+        </div>
+
+        <!-- Program -->
+        <div class="section-block">
+            <h3>Svatební program</h3>
+            <ul class="program-list">
+                <li><span class="program-time">11:00</span> <span>Svatební obřad</span></li>
+                <li><span class="program-time">12:30</span> <span>Slavnostní oběd</span></li>
+                <li><span class="program-time">15:00</span> <span>Krájení dortu a káva</span></li>
+                <li><span class="program-time">18:00</span> <span>Večeře a zábava</span></li>
+            </ul>
+        </div>
+
+        <!-- Svatební dary -->
+        <div class="section-block">
+            <h3>Svatební dary</h3>
+            <p class="gifts-text">Hlavně když tu budete s námi! Pokud byste nás ale chtěli přece jen něčím obdarovat, největší radost nám udělá příspěvek na naše společné novomanželské bydlení.</p>
+        </div>
+
+        <!-- RSVP -->
+        <div class="section-block">
+            <h3>RSVP – Potvrzení účasti</h3>
+            <form class="rsvp-form" id="rsvpForm" onsubmit="handleRSVP(event)">
+                <input type="text" id="rsvp-name" placeholder="Vaše jméno a příjmení" required>
+                <input type="email" id="rsvp-email" placeholder="Váš e-mail" required>
+                <select id="rsvp-status" required>
+                    <option value="" disabled selected>Zvolte možnost</option>
+                    <option value="yes">S radostí přijdu</option>
+                    <option value="no">Bohužel se nedostavím</option>
+                </select>
+                <button type="submit" class="rsvp-submit">Odeslat odpověď</button>
+            </form>
+            <div class="rsvp-success" id="rsvpSuccess">Děkujeme za vaši odpověď! Úspěšně uloženo.</div>
+        </div>
+    </div>
+
+
     <script>
+        // Logika pro puzzle
         const bgPositions = [
-            '0px 0px',         // Levý horní
-            '-140px 0px',      // Pravý horní
-            '0px -140px',      // Levý dolní
-            '-140px -140px'    // Pravý dolní
+            '0px 0px',         
+            '-140px 0px',      
+            '0px -140px',      
+            '-140px -140px'    
         ];
 
         const pieces = Array.from(document.querySelectorAll('.puzzle-piece'));
@@ -166,7 +379,6 @@
             return array;
         }
 
-        // Pojistka: zkontroluje, zda je stav vzdálený od výhry jen 1 prohození
         function isOneSwapAway(arr) {
             let mismatched = [];
             for (let i = 0; i < arr.length; i++) {
@@ -233,7 +445,6 @@
                     p.style.cursor = 'default';
                 });
 
-                // Změna textu pod puzzle po úspěšném složení
                 const subtitle = document.getElementById('subtitle-text');
                 subtitle.style.opacity = 0;
                 setTimeout(() => {
@@ -242,10 +453,8 @@
                     subtitle.style.opacity = 1;
                 }, 300);
 
-                // Spuštění konfet (prodloužené)
                 launchConfetti();
 
-                // Zobrazení tlačítka (s prodlevou 2.5s)
                 setTimeout(() => {
                     document.getElementById('btn-more').classList.add('visible');
                 }, 2500);
@@ -254,49 +463,65 @@
 
         function launchConfetti() {
             const eucalyptusColors = ['#5c7462', '#8ab092', '#c3d5c5', '#ffffff', '#d1d5d1', '#9fa8a0'];
-            
-            // 1. Vlna
-            confetti({
-                particleCount: 60,
-                spread: 70,
-                origin: { y: 0.6 },
-                colors: eucalyptusColors,
-                shapes: ['square']
-            });
-
-            // 2. Vlna
+            confetti({ particleCount: 60, spread: 70, origin: { y: 0.6 }, colors: eucalyptusColors, shapes: ['square'] });
             setTimeout(() => {
-                confetti({
-                    particleCount: 40,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: 0 },
-                    colors: eucalyptusColors,
-                    shapes: ['square']
-                });
-                confetti({
-                    particleCount: 40,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1 },
-                    colors: eucalyptusColors,
-                    shapes: ['square']
-                });
+                confetti({ particleCount: 40, angle: 60, spread: 55, origin: { x: 0 }, colors: eucalyptusColors, shapes: ['square'] });
+                confetti({ particleCount: 40, angle: 120, spread: 55, origin: { x: 1 }, colors: eucalyptusColors, shapes: ['square'] });
             }, 400);
-
-            // 3. Vlna (závěrečný déšť)
             setTimeout(() => {
-                confetti({
-                    particleCount: 50,
-                    spread: 100,
-                    origin: { y: 0.3 },
-                    colors: eucalyptusColors,
-                    shapes: ['square']
-                });
+                confetti({ particleCount: 50, spread: 100, origin: { y: 0.3 }, colors: eucalyptusColors, shapes: ['square'] });
             }, 1200);
         }
 
         initPuzzle();
+
+        // Přechod na druhou stránku
+        function goToDetails() {
+            const puzzlePage = document.getElementById('page-puzzle');
+            const detailsPage = document.getElementById('page-details');
+
+            puzzlePage.style.opacity = 0;
+            setTimeout(() => {
+                puzzlePage.classList.add('hidden');
+                detailsPage.classList.remove('hidden');
+                detailsPage.style.opacity = 1;
+                window.scrollTo(0, 0);
+            }, 500);
+        }
+
+        // Odpočet do 17. září 2027 (11:00 dopoledne)
+        const weddingDate = new Date("Sep 17, 2027 11:00:00").getTime();
+
+        const countdownTimer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance < 0) {
+                clearInterval(countdownTimer);
+                document.getElementById("days").textContent = "0";
+                document.getElementById("hours").textContent = "0";
+                document.getElementById("minutes").textContent = "0";
+                document.getElementById("seconds").textContent = "0";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").textContent = days;
+            document.getElementById("hours").textContent = hours;
+            document.getElementById("minutes").textContent = minutes;
+            document.getElementById("seconds").textContent = seconds;
+        }, 1000);
+
+        // Jednoduché zpracování RSVP formuláře (zatím ukáže děkovnou zprávu)
+        function handleRSVP(event) {
+            event.preventDefault();
+            document.getElementById('rsvpForm').style.display = 'none';
+            document.getElementById('rsvpSuccess').style.display = 'block';
+        }
     </script>
 </body>
 </html>
