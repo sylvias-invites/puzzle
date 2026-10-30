@@ -6,8 +6,8 @@
     <title>Svatební pozvánka - Lenka & Patrik</title>
     <!-- Načtení knihovny pro konfety -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <!-- Google Fonts pro elegantní písmo -->
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Google Fonts pro okrasné písmo Great Vibes a základní písma -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -27,7 +27,7 @@
             padding: 20px;
         }
 
-        .card-container, .details-container {
+        .card-container {
             width: 100%;
             max-width: 440px;
             text-align: center;
@@ -35,21 +35,40 @@
             padding: 30px 20px;
             transition: opacity 0.5s ease;
             position: relative;
-            /* Rámeček kompletně odstraněn */
         }
 
-        /* Skrytí stránky */
+        .details-container {
+            width: 100%;
+            max-width: 440px;
+            text-align: center;
+            background: #ffffff;
+            padding: 30px 0;
+            transition: opacity 0.5s ease;
+            position: relative;
+        }
+
+        .details-inner-padding {
+            padding: 0 20px;
+        }
+
         .hidden {
             display: none !important;
         }
 
-        /* Styl pro květinové dekorace */
         .floral-top, .floral-bottom {
             width: 100%;
             max-height: 70px;
             object-fit: contain;
             margin-bottom: 15px;
             opacity: 0.85;
+        }
+
+        .floral-top-center {
+            display: block;
+            margin: 0 auto 15px auto;
+            max-height: 65px;
+            object-fit: contain;
+            opacity: 0.9;
         }
 
         .floral-bottom {
@@ -62,12 +81,11 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 2.3rem;
             font-weight: 600;
-            color: #4a5d4e; /* Zelená jména */
+            color: #4a5d4e;
             margin-bottom: 10px;
             letter-spacing: 1px;
         }
 
-        /* Ostatní text na úvodní straně černý */
         .subtitle {
             font-size: 1.1rem;
             color: #333333; 
@@ -82,7 +100,6 @@
             color: #4a5d4e;
         }
 
-        /* Styl pro puzzle mřížku (2x2) */
         .puzzle-board {
             display: grid;
             grid-template-columns: repeat(2, 140px);
@@ -114,7 +131,6 @@
             transform: scale(0.96);
         }
 
-        /* Tlačítka */
         .info-button {
             display: inline-block;
             opacity: 0;
@@ -144,30 +160,46 @@
             background-color: #4a5d4e;
         }
 
-        /* =================STYLY PRO DRUHOU STRÁNKU================= */
         .details-header h2 {
             font-family: 'Cormorant Garamond', serif;
             font-size: 2.3rem;
             font-weight: 600;
-            color: #4a5d4e; /* Zelená jména */
+            color: #4a5d4e;
             margin-bottom: 5px;
             letter-spacing: 1px;
         }
 
         .wedding-date {
             font-size: 1.05rem;
-            color: #333333; /* Černé datum */
+            color: #333333;
             font-weight: 400;
             letter-spacing: 2px;
             margin-bottom: 12px;
         }
 
         .welcome-msg {
-            font-size: 0.95rem;
-            color: #333333; /* Černý text */
-            font-style: italic;
-            margin-bottom: 25px;
-            font-weight: 300;
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8rem;
+            color: #4a5d4e;
+            margin-bottom: 20px;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+
+        .couple-photo-wrapper {
+            width: 100%;
+            margin: 15px 0 25px 0;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .couple-photo {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            object-position: center;
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+            mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
         }
 
         .countdown-title {
@@ -179,7 +211,6 @@
             font-weight: 500;
         }
 
-        /* Odpočet */
         .countdown-box {
             display: flex;
             justify-content: center;
@@ -199,7 +230,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.6rem;
             font-weight: 600;
-            color: #333333; /* Černá čísla v countu */
+            color: #333333;
             display: block;
         }
 
@@ -210,9 +241,90 @@
             letter-spacing: 1px;
         }
 
-        /* Sekce obsahu */
-        .section-block {
+        .program-free-section {
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .program-free-section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: #4a5d4e;
             margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 380px;
+            margin: 0 auto;
+            padding: 10px 0;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: #5c7462;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 12px 0;
+            position: relative;
+            width: 50%;
+        }
+
+        .timeline-item.left {
+            left: 0;
+            text-align: right;
+            padding-right: 20px;
+        }
+
+        .timeline-item.right {
+            left: 50%;
+            text-align: left;
+            padding-left: 20px;
+        }
+
+        .timeline-item.left::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            width: 12px;
+            height: 2px;
+            background-color: #5c7462;
+        }
+
+        .timeline-item.right::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 12px;
+            height: 2px;
+            background-color: #5c7462;
+        }
+
+        .timeline-content {
+            font-size: 0.9rem;
+            color: #333333;
+        }
+
+        .timeline-time {
+            font-weight: 600;
+            color: #5c7462;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .section-block {
+            margin-bottom: 25px;
             text-align: left;
             background: #fcfdfc;
             padding: 15px;
@@ -223,69 +335,17 @@
         .section-block h3 {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.3rem;
-            color: #4a5d4e; /* Zelený nadpis sekce */
+            color: #4a5d4e;
             margin-bottom: 15px;
             border-bottom: 1px solid #e2ebe3;
             padding-bottom: 4px;
             text-align: center;
         }
 
-        /* Timeline program podle vzoru z fotky */
-        .timeline {
-            position: relative;
-            max-width: 350px;
-            margin: 0 auto;
-            padding: 10px 0;
-        }
-
-        /* Svislá čára uprostřed */
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 2px;
-            background-color: #d1dcd3;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -1px;
-        }
-
-        .timeline-item {
-            padding: 8px 0;
-            position: relative;
-            width: 50%;
-        }
-
-        .timeline-item.left {
-            left: 0;
-            text-align: right;
-            padding-right: 15px;
-        }
-
-        .timeline-item.right {
-            left: 50%;
-            text-align: left;
-            padding-left: 15px;
-        }
-
-        .timeline-content {
-            font-size: 0.85rem;
-            color: #333333; /* Černý text v programu */
-        }
-
-        .timeline-time {
-            font-weight: 600;
-            color: #5c7462;
-            font-size: 0.85rem;
-            display: block;
-            margin-bottom: 2px;
-        }
-
-        /* Dresscode paletka */
         .dresscode-content {
             text-align: center;
             font-size: 0.9rem;
-            color: #333333; /* Černý text */
+            color: #333333;
             line-height: 1.4;
         }
 
@@ -306,12 +366,11 @@
 
         .gifts-text {
             font-size: 0.9rem;
-            color: #333333; /* Černý text */
+            color: #333333;
             text-align: center;
             line-height: 1.4;
         }
 
-        /* RSVP Formulář */
         .rsvp-form {
             display: flex;
             flex-direction: column;
@@ -363,7 +422,7 @@
 </head>
 <body>
 
-    <!-- ================= 1. STRÁNKA: ÚVOD A PUZZLE ================= -->
+    <!-- 1. STRÁNKA: ÚVOD A PUZZLE -->
     <div class="card-container" id="page-puzzle">
         <img src="https://raw.githubusercontent.com/sylvias-invites/puzzle/main/vetev-horni.png" alt="Květinová dekorace" class="floral-top" onerror="this.style.display='none'">
         
@@ -381,112 +440,112 @@
         <button id="btn-more" class="info-button" onclick="goToDetails()">Pro další informace klikněte sem</button>
     </div>
 
-
-    <!-- ================= 2. STRÁNKA: DETAILY SVATBY ================= -->
+    <!-- 2. STRÁNKA: DETAILY SVATBY -->
     <div class="details-container hidden" id="page-details">
-        <img src="https://raw.githubusercontent.com/sylvias-invites/puzzle/main/vetev-horni.png" alt="Květinová dekorace" class="floral-top" onerror="this.style.display='none'">
+        <img src="https://raw.githubusercontent.com/sylvias-invites/puzzle/main/eukalyptus.png" alt="Eukalyptus" class="floral-top-center" onerror="this.src='https://raw.githubusercontent.com/sylvias-invites/puzzle/main/vetev-horni.png'">
 
-        <div class="details-header">
-            <h2>Lenka & Patrik</h2>
-            <div class="wedding-date">17. 09. 2027</div>
-            <p class="welcome-msg">„Těšíme se, až tento významný den strávíte s námi.“</p>
-        </div>
-
-        <!-- Odpočet -->
-        <div class="countdown-title">Naše svatba proběhne za:</div>
-        <div class="countdown-box">
-            <div class="countdown-item">
-                <span class="countdown-number" id="days">00</span>
-                <span class="countdown-label">Dní</span>
-            </div>
-            <div class="countdown-item">
-                <span class="countdown-number" id="hours">00</span>
-                <span class="countdown-label">Hodin</span>
-            </div>
-            <div class="countdown-item">
-                <span class="countdown-number" id="minutes">00</span>
-                <span class="countdown-label">Minut</span>
-            </div>
-            <div class="countdown-item">
-                <span class="countdown-number" id="seconds">00</span>
-                <span class="countdown-label">Vteřin</span>
+        <div class="details-inner-padding">
+            <div class="details-header">
+                <h2>Lenka & Patrik</h2>
+                <div class="wedding-date">17. 09. 2027</div>
+                <p class="welcome-msg">Těšíme se, až tento významný den strávíte s námi.</p>
             </div>
         </div>
 
-        <!-- Program (stylizovaný podle fotky s čarou uprostřed) -->
-        <div class="section-block">
-            <h3>Svatební program</h3>
-            <div class="timeline">
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <span class="timeline-time">11:00</span>
-                        <span>Svatební obřad</span>
+        <div class="couple-photo-wrapper">
+            <img src="https://raw.githubusercontent.com/sylvias-invites/puzzle/main/snoubenci.png" alt="Lenka a Patrik" class="couple-photo">
+        </div>
+
+        <div class="details-inner-padding">
+            <div class="countdown-title">Naše svatba proběhne za:</div>
+            <div class="countdown-box">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">00</span>
+                    <span class="countdown-label">Dní</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">00</span>
+                    <span class="countdown-label">Hodin</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">00</span>
+                    <span class="countdown-label">Minut</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">00</span>
+                    <span class="countdown-label">Vteřin</span>
+                </div>
+            </div>
+
+            <div class="program-free-section">
+                <h3>Svatební program</h3>
+                <div class="timeline">
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <span class="timeline-time">11:00</span>
+                            <span>Svatební obřad</span>
+                        </div>
+                    </div>
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <span class="timeline-time">12:30</span>
+                            <span>Slavnostní oběd</span>
+                        </div>
+                    </div>
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <span class="timeline-time">15:00</span>
+                            <span>Krájení dortu a káva</span>
+                        </div>
+                    </div>
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <span class="timeline-time">18:00</span>
+                            <span>Večeře a zábava</span>
+                        </div>
                     </div>
                 </div>
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <span class="timeline-time">12:30</span>
-                        <span>Slavnostní oběd</span>
+            </div>
+
+            <div class="section-block">
+                <h3>Dresscode</h3>
+                <div class="dresscode-content">
+                    <div class="color-palette">
+                        <div class="color-circle" style="background-color: #f4f1ea;"></div>
+                        <div class="color-circle" style="background-color: #d1dcd3;"></div>
+                        <div class="color-circle" style="background-color: #8ab092;"></div>
+                        <div class="color-circle" style="background-color: #5c7462;"></div>
+                        <div class="color-circle" style="background-color: #d4c3b3;"></div>
                     </div>
-                </div>
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <span class="timeline-time">15:00</span>
-                        <span>Krájení dortu a káva</span>
-                    </div>
-                </div>
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <span class="timeline-time">18:00</span>
-                        <span>Večeře a zábava</span>
-                    </div>
+                    <p>Vyhněte se prosím bílé a červené barvě.</p>
                 </div>
             </div>
-        </div>
 
-        <!-- Dresscode -->
-        <div class="section-block">
-            <h3>Dresscode</h3>
-            <div class="dresscode-content">
-                <div class="color-palette">
-                    <div class="color-circle" style="background-color: #f4f1ea;"></div>
-                    <div class="color-circle" style="background-color: #d1dcd3;"></div>
-                    <div class="color-circle" style="background-color: #8ab092;"></div>
-                    <div class="color-circle" style="background-color: #5c7462;"></div>
-                    <div class="color-circle" style="background-color: #d4c3b3;"></div>
-                </div>
-                <p>Vyhněte se prosím bílé a červené barvě.</p>
+            <div class="section-block">
+                <h3>Svatební dary</h3>
+                <p class="gifts-text">Hlavně když tu budete s námi! Pokud byste nás ale chtěli přece jen něčím obdarovat, největší radost nám udělá příspěvek na naše společné novomanželské bydlení.</p>
             </div>
-        </div>
 
-        <!-- Svatební dary -->
-        <div class="section-block">
-            <h3>Svatební dary</h3>
-            <p class="gifts-text">Hlavně když tu budete s námi! Pokud byste nás ale chtěli přece jen něčím obdarovat, největší radost nám udělá příspěvek na naše společné novomanželské bydlení.</p>
-        </div>
+            <div class="section-block">
+                <h3>RSVP – Potvrzení účasti</h3>
+                <form class="rsvp-form" id="rsvpForm" onsubmit="handleRSVP(event)">
+                    <input type="text" id="rsvp-name" placeholder="Vaše jméno a příjmení" required>
+                    <input type="email" id="rsvp-email" placeholder="Váš e-mail" required>
+                    <select id="rsvp-status" required>
+                        <option value="" disabled selected>Zvolte možnost</option>
+                        <option value="yes">S radostí přijdu</option>
+                        <option value="no">Bohužel se nedostavím</option>
+                    </select>
+                    <button type="submit" class="rsvp-submit">Odeslat odpověď</button>
+                </form>
+                <div class="rsvp-success" id="rsvpSuccess">Děkujeme za vaši odpověď! Úspěšně uloženo.</div>
+            </div>
 
-        <!-- RSVP -->
-        <div class="section-block">
-            <h3>RSVP – Potvrzení účasti</h3>
-            <form class="rsvp-form" id="rsvpForm" onsubmit="handleRSVP(event)">
-                <input type="text" id="rsvp-name" placeholder="Vaše jméno a příjmení" required>
-                <input type="email" id="rsvp-email" placeholder="Váš e-mail" required>
-                <select id="rsvp-status" required>
-                    <option value="" disabled selected>Zvolte možnost</option>
-                    <option value="yes">S radostí přijdu</option>
-                    <option value="no">Bohužel se nedostavím</option>
-                </select>
-                <button type="submit" class="rsvp-submit">Odeslat odpověď</button>
-            </form>
-            <div class="rsvp-success" id="rsvpSuccess">Děkujeme za vaši odpověď! Úspěšně uloženo.</div>
+            <img src="https://raw.githubusercontent.com/sylvias-invites/puzzle/main/vetev-dolni.png" alt="Květinová dekorace" class="floral-bottom" onerror="this.style.display='none'">
         </div>
-
-        <img src="https://raw.githubusercontent.com/sylvias-invites/puzzle/main/vetev-dolni.png" alt="Květinová dekorace" class="floral-bottom" onerror="this.style.display='none'">
     </div>
 
-
     <script>
-        // Logika pro puzzle
         const bgPositions = [
             '0px 0px',         
             '-140px 0px',      
@@ -604,7 +663,6 @@
 
         initPuzzle();
 
-        // Přechod na druhou stránku
         function goToDetails() {
             const puzzlePage = document.getElementById('page-puzzle');
             const detailsPage = document.getElementById('page-details');
@@ -618,7 +676,6 @@
             }, 500);
         }
 
-        // Odpočet do 17. září 2027 (11:00 dopoledne)
         const weddingDate = new Date("Sep 17, 2027 11:00:00").getTime();
 
         const countdownTimer = setInterval(function() {
