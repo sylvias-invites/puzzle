@@ -87,6 +87,13 @@
             transition: opacity 0.4s ease;
         }
 
+        .subtitle.solved {
+    font-size: 1.5rem; /* Zvětšené písmo (původní bylo 1.1rem) */
+    font-weight: 500;  /* Volitelně: mírně tučnější pro lepší čitelnost */
+    color: #4a5d4e;    /* Volitelně: ladící barva do zelena jako nadpis */
+       }
+
+
         /* Tlačítko po složení */
         .info-button {
             display: inline-block;
@@ -231,6 +238,7 @@
                 subtitle.style.opacity = 0;
                 setTimeout(() => {
                     subtitle.textContent = "Srdečně vás zveme na naši svatbu!";
+                    subtitle.classList.add('solved');
                     subtitle.style.opacity = 1;
                 }, 300);
 
