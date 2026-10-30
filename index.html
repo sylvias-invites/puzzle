@@ -99,6 +99,7 @@
         .subtitle.solved {
             font-size: 1.4rem;
             font-weight: 500;
+            font-family: 'Cormorant Garamond', serif;
             color: #333333;
         }
 
@@ -418,6 +419,8 @@
         <!-- 1. STRÁNKA: ÚVOD A PUZZLE -->
     <div class="card-container" id="page-puzzle">
         <img src="https://raw.githubusercontent.com/sylvias-invites/puzzle/main/vetev-horni.png" alt="Květinová dekorace" class="floral-top" onerror="this.style.display='none'">
+        <img src="artkytka.png" alt="Art kytka" class="floral-top-center" id="art-flower" style="max-height: 120px; object-fit: contain;" onerror="this.style.display='none'">
+
         
         <h1>Lenka & Patrik</h1>
 
@@ -646,6 +649,8 @@
                     subtitle.classList.add('solved');
                     subtitle.style.opacity = 1;
                 }, 300);
+                 const artFlower = document.getElementById('art-flower');
+                if (artFlower) artFlower.style.display = 'none';
 
                 launchConfetti();
 
