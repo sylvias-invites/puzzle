@@ -42,7 +42,7 @@
             max-width: 440px;
             text-align: center;
             background: #ffffff;
-            padding: 30px 0;
+            padding: 0;
             transition: opacity 0.5s ease;
             position: relative;
         }
@@ -177,6 +177,7 @@
             font-size: 1.8rem;
             color: black;
             margin-bottom: 20px;
+            margin-top: 20px;
             font-weight: 400;
             line-height: 1.4;
         }
@@ -201,6 +202,7 @@
             font-size: 0.9rem;
             color: #333333;
             margin-bottom: 10px;
+            margin-top: 30px;
             letter-spacing: 1px;
             text-transform: uppercase;
             font-weight: 500;
@@ -238,6 +240,7 @@
 
         .program-free-section {
             margin-bottom: 30px;
+            margin-top: 40px;
             text-align: left;
         }
 
@@ -419,7 +422,7 @@
         <!-- 1. STRÁNKA: ÚVOD A PUZZLE -->
     <div class="card-container" id="page-puzzle">
         <img src="https://raw.githubusercontent.com/sylvias-invites/puzzle/main/vetev-horni.png" alt="Květinová dekorace" class="floral-top" onerror="this.style.display='none'">
-        <img src="artkytka.png" alt="Art kytka" class="floral-top-center" id="art-flower" style="max-height: 220px; margin-bottom: -10px; object-fit: contain;" onerror="this.style.display='none'">
+        <img src="artkytka.png" alt="Art kytka" class="floral-top-center" id="art-flower" style="max-height: 320px; margin-bottom: -10px; object-fit: contain;" onerror="this.style.display='none'">
 
         
         <h1>Lenka & Patrik</h1>
@@ -472,10 +475,19 @@
                 </div>
             </div>
 
-                     <!-- Místo konání svatby a interaktivní mapa -->
-            <div class="section-block" style="text-align: center;">
+                        <!-- Místo konání svatby a Google mapa -->
+            <div class="section-block" style="text-align: center; background: transparent; border: none; padding: 0;">
                 <h3>Místo konání svatby</h3>
-                <p style="margin-bottom: 12px; font-size: 0.95rem; color: #333333;">Svatba se bude konat na statku Všetice.</p>
+                <p style="margin-bottom: 12px; font-size: 0.95rem; color: #333333;">Svatba se bude konat na statku Všetice. Přesnou polohu najdete na mapě:</p>
+                
+                <!-- Čisté vložení Google Mapy -->
+                <div style="width: 100%; height: 180px; border-radius: 8px; overflow: hidden; border: 1px solid #d5e1d7; margin-bottom: 10px;">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2581.8!2d14.4845!3d49.7745!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470b85a3c2a3c7cf%3A0x400af0f6614b0b0!2zU3RhdGVrIFYuZXRpY2U!5e0!3m2!1scs!2scz!4v1!5m2!1scs!2scz" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+                
+                <a href="https://maps.google.com/?q=Statek+Všetice" target="_blank" style="display: inline-block; font-size: 0.85rem; color: #5c7462; text-decoration: underline; font-weight: 500;">Otevřít v aplikaci Google Maps</a>
+            </div>
+
                 
                 <!-- Interaktivní mapa Mapy.cz -->
                 <div style="width: 100%; height: 180px; border-radius: 8px; overflow: hidden; border: 1px solid #d5e1d7;">
