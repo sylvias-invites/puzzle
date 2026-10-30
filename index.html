@@ -45,7 +45,7 @@
             display: none !important;
         }
 
-        /* Styl pro květinové dekorace (zákoutí) */
+        /* Styl pro květinové dekorace */
         .floral-top, .floral-bottom {
             width: 100%;
             max-height: 70px;
@@ -57,7 +57,7 @@
         .floral-bottom {
             margin-top: 20px;
             margin-bottom: 10px;
-            transform: scaleX(-1); /* Mírné otočení pro přirozený vzhled */
+            transform: scaleX(-1);
         }
 
         h1, .details-header h2 {
@@ -283,7 +283,6 @@
 
     <!-- ================= 1. STRÁNKA: ÚVOD A PUZZLE ================= -->
     <div class="card-container" id="page-puzzle">
-        <!-- Horní květinová dekorace (můžete nahradit odkazem na váš obrázek květu) -->
         <img src="https://raw.githubusercontent.com/sylvias-invites/puzzle/main/vetev-horni.png" alt="Květinová dekorace" class="floral-top" onerror="this.style.display='none'">
         
         <h1>Lenka & Patrik</h1>
@@ -303,7 +302,6 @@
 
     <!-- ================= 2. STRÁNKA: DETAILY SVATBY ================= -->
     <div class="details-container hidden" id="page-details">
-        <!-- Horní květinová dekorace -->
         <img src="https://raw.githubusercontent.com/sylvias-invites/puzzle/main/vetev-horni.png" alt="Květinová dekorace" class="floral-top" onerror="this.style.display='none'">
 
         <div class="details-header">
@@ -364,7 +362,6 @@
             <div class="rsvp-success" id="rsvpSuccess">Děkujeme za vaši odpověď! Úspěšně uloženo.</div>
         </div>
 
-        <!-- Dolní květinová dekorace -->
         <img src="https://raw.githubusercontent.com/sylvias-invites/puzzle/main/vetev-dolni.png" alt="Květinová dekorace" class="floral-bottom" onerror="this.style.display='none'">
     </div>
 
@@ -505,7 +502,7 @@
         // Odpočet do 17. září 2027 (11:00 dopoledne)
         const weddingDate = new Date("Sep 17, 2027 11:00:00").getTime();
 
-        const countdownTimer = setInterval(function`{`
+        const countdownTimer = setInterval(function() {
             const now = new Date().getTime();
             const distance = weddingDate - now;
 
