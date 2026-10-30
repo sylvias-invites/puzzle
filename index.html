@@ -29,15 +29,13 @@
 
         .card-container, .details-container {
             width: 100%;
-            max-width: 420px;
+            max-width: 440px;
             text-align: center;
             background: #ffffff;
             padding: 30px 20px;
             transition: opacity 0.5s ease;
             position: relative;
-            border: 1px solid #edf2ee;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(92, 116, 98, 0.05);
+            /* Rámeček kompletně odstraněn */
         }
 
         /* Skrytí stránky */
@@ -60,13 +58,28 @@
             transform: scaleX(-1);
         }
 
-        h1, .details-header h2 {
+        h1 {
             font-family: 'Cormorant Garamond', serif;
             font-size: 2.3rem;
             font-weight: 600;
-            color: #4a5d4e;
+            color: #4a5d4e; /* Zelená jména */
             margin-bottom: 10px;
             letter-spacing: 1px;
+        }
+
+        /* Ostatní text na úvodní straně černý */
+        .subtitle {
+            font-size: 1.1rem;
+            color: #333333; 
+            margin-bottom: 20px;
+            font-weight: 300;
+            transition: opacity 0.4s ease, font-size 0.3s ease;
+        }
+
+        .subtitle.solved {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #4a5d4e;
         }
 
         /* Styl pro puzzle mřížku (2x2) */
@@ -101,20 +114,6 @@
             transform: scale(0.96);
         }
 
-        .subtitle {
-            font-size: 1.1rem;
-            color: #666666;
-            margin-bottom: 20px;
-            font-weight: 300;
-            transition: opacity 0.4s ease, font-size 0.3s ease;
-        }
-
-        .subtitle.solved {
-            font-size: 1.4rem;
-            font-weight: 500;
-            color: #4a5d4e;
-        }
-
         /* Tlačítka */
         .info-button {
             display: inline-block;
@@ -146,12 +145,38 @@
         }
 
         /* =================STYLY PRO DRUHOU STRÁNKU================= */
+        .details-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.3rem;
+            font-weight: 600;
+            color: #4a5d4e; /* Zelená jména */
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
         .wedding-date {
             font-size: 1.05rem;
-            color: #666666;
-            font-weight: 300;
+            color: #333333; /* Černé datum */
+            font-weight: 400;
             letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .welcome-msg {
+            font-size: 0.95rem;
+            color: #333333; /* Černý text */
+            font-style: italic;
             margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        .countdown-title {
+            font-size: 0.9rem;
+            color: #333333;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 500;
         }
 
         /* Odpočet */
@@ -159,7 +184,7 @@
             display: flex;
             justify-content: center;
             gap: 12px;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
         .countdown-item {
@@ -174,7 +199,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.6rem;
             font-weight: 600;
-            color: #4a5d4e;
+            color: #333333; /* Černá čísla v countu */
             display: block;
         }
 
@@ -198,33 +223,90 @@
         .section-block h3 {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.3rem;
-            color: #4a5d4e;
-            margin-bottom: 10px;
+            color: #4a5d4e; /* Zelený nadpis sekce */
+            margin-bottom: 15px;
             border-bottom: 1px solid #e2ebe3;
             padding-bottom: 4px;
             text-align: center;
         }
 
-        .program-list {
-            list-style: none;
-            font-size: 0.9rem;
-            color: #555555;
+        /* Timeline program podle vzoru z fotky */
+        .timeline {
+            position: relative;
+            max-width: 350px;
+            margin: 0 auto;
+            padding: 10px 0;
         }
 
-        .program-list li {
-            margin-bottom: 6px;
-            display: flex;
-            justify-content: space-between;
+        /* Svislá čára uprostřed */
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: #d1dcd3;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
         }
 
-        .program-time {
+        .timeline-item {
+            padding: 8px 0;
+            position: relative;
+            width: 50%;
+        }
+
+        .timeline-item.left {
+            left: 0;
+            text-align: right;
+            padding-right: 15px;
+        }
+
+        .timeline-item.right {
+            left: 50%;
+            text-align: left;
+            padding-left: 15px;
+        }
+
+        .timeline-content {
+            font-size: 0.85rem;
+            color: #333333; /* Černý text v programu */
+        }
+
+        .timeline-time {
             font-weight: 600;
             color: #5c7462;
+            font-size: 0.85rem;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        /* Dresscode paletka */
+        .dresscode-content {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #333333; /* Černý text */
+            line-height: 1.4;
+        }
+
+        .color-palette {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .color-circle {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 1px solid #d5e1d7;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
         .gifts-text {
             font-size: 0.9rem;
-            color: #555555;
+            color: #333333; /* Černý text */
             text-align: center;
             line-height: 1.4;
         }
@@ -307,9 +389,11 @@
         <div class="details-header">
             <h2>Lenka & Patrik</h2>
             <div class="wedding-date">17. 09. 2027</div>
+            <p class="welcome-msg">„Těšíme se, až tento významný den strávíte s námi.“</p>
         </div>
 
         <!-- Odpočet -->
+        <div class="countdown-title">Naše svatba proběhne za:</div>
         <div class="countdown-box">
             <div class="countdown-item">
                 <span class="countdown-number" id="days">00</span>
@@ -329,15 +413,50 @@
             </div>
         </div>
 
-        <!-- Program -->
+        <!-- Program (stylizovaný podle fotky s čarou uprostřed) -->
         <div class="section-block">
             <h3>Svatební program</h3>
-            <ul class="program-list">
-                <li><span class="program-time">11:00</span> <span>Svatební obřad</span></li>
-                <li><span class="program-time">12:30</span> <span>Slavnostní oběd</span></li>
-                <li><span class="program-time">15:00</span> <span>Krájení dortu a káva</span></li>
-                <li><span class="program-time">18:00</span> <span>Večeře a zábava</span></li>
-            </ul>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <span class="timeline-time">11:00</span>
+                        <span>Svatební obřad</span>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <span class="timeline-time">12:30</span>
+                        <span>Slavnostní oběd</span>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <span class="timeline-time">15:00</span>
+                        <span>Krájení dortu a káva</span>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <span class="timeline-time">18:00</span>
+                        <span>Večeře a zábava</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dresscode -->
+        <div class="section-block">
+            <h3>Dresscode</h3>
+            <div class="dresscode-content">
+                <div class="color-palette">
+                    <div class="color-circle" style="background-color: #f4f1ea;"></div>
+                    <div class="color-circle" style="background-color: #d1dcd3;"></div>
+                    <div class="color-circle" style="background-color: #8ab092;"></div>
+                    <div class="color-circle" style="background-color: #5c7462;"></div>
+                    <div class="color-circle" style="background-color: #d4c3b3;"></div>
+                </div>
+                <p>Vyhněte se prosím bílé a červené barvě.</p>
+            </div>
         </div>
 
         <!-- Svatební dary -->
