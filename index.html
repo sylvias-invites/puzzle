@@ -63,13 +63,16 @@
             opacity: 0.85;
         }
 
-        .floral-top-center {
+     .floral-top-center {
             display: block;
-            margin: 0 auto 15px auto;
-            max-height: 65px;
-            object-fit: contain;
+            width: 100%;          /* Roztáhne se na celou šířku */
+            height: 90px;         /* Zvětší výšku, aby nebyl malinký */
+            object-fit: cover;    /* Ořízne a vyplní prostor od okraje ke kraji */
+            object-position: center;
+            margin-bottom: 20px;
             opacity: 0.9;
         }
+
 
         .floral-bottom {
             margin-top: 20px;
