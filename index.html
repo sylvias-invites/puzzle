@@ -27,13 +27,17 @@
             padding: 20px;
         }
 
-        .card-container {
+        .card-container, .details-container {
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
             text-align: center;
             background: #ffffff;
             padding: 30px 20px;
             transition: opacity 0.5s ease;
+            position: relative;
+            border: 1px solid #edf2ee;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(92, 116, 98, 0.05);
         }
 
         /* Skrytí stránky */
@@ -41,12 +45,27 @@
             display: none !important;
         }
 
-        h1 {
+        /* Styl pro květinové dekorace (zákoutí) */
+        .floral-top, .floral-bottom {
+            width: 100%;
+            max-height: 70px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            opacity: 0.85;
+        }
+
+        .floral-bottom {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            transform: scaleX(-1); /* Mírné otočení pro přirozený vzhled */
+        }
+
+        h1, .details-header h2 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
+            font-size: 2.3rem;
             font-weight: 600;
             color: #4a5d4e;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
             letter-spacing: 1px;
         }
 
@@ -57,7 +76,7 @@
             grid-template-rows: repeat(2, 140px);
             gap: 4px;
             justify-content: center;
-            margin: 0 auto 25px auto;
+            margin: 15px auto 20px auto;
             width: 284px;
             height: 284px;
             background-color: #f9f9f9;
@@ -85,13 +104,13 @@
         .subtitle {
             font-size: 1.1rem;
             color: #666666;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             font-weight: 300;
             transition: opacity 0.4s ease, font-size 0.3s ease;
         }
 
         .subtitle.solved {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 500;
             color: #4a5d4e;
         }
@@ -105,7 +124,7 @@
             transform: translateY(10px);
             background-color: #5c7462;
             color: #ffffff;
-            padding: 14px 24px;
+            padding: 12px 24px;
             text-decoration: none;
             border-radius: 30px;
             font-size: 0.9rem;
@@ -127,55 +146,40 @@
         }
 
         /* =================STYLY PRO DRUHOU STRÁNKU================= */
-        .details-container {
-            width: 100%;
-            max-width: 450px;
-            background: #ffffff;
-            padding: 30px 20px;
-            text-align: center;
-        }
-
-        .details-header h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.3rem;
-            color: #4a5d4e;
-            margin-bottom: 5px;
-        }
-
         .wedding-date {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: #666666;
             font-weight: 300;
             letter-spacing: 2px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         /* Odpočet */
         .countdown-box {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 35px;
+            gap: 12px;
+            margin-bottom: 25px;
         }
 
         .countdown-item {
             background: #f4f7f4;
-            padding: 12px 15px;
+            padding: 10px 12px;
             border-radius: 8px;
-            min-width: 70px;
+            min-width: 65px;
             border: 1px solid #e2ebe3;
         }
 
         .countdown-number {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 600;
             color: #4a5d4e;
             display: block;
         }
 
         .countdown-label {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #666666;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -183,32 +187,32 @@
 
         /* Sekce obsahu */
         .section-block {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             text-align: left;
             background: #fcfdfc;
-            padding: 20px;
-            border-radius: 10px;
+            padding: 15px;
+            border-radius: 8px;
             border: 1px solid #edf2ee;
         }
 
         .section-block h3 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             color: #4a5d4e;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             border-bottom: 1px solid #e2ebe3;
-            padding-bottom: 5px;
+            padding-bottom: 4px;
             text-align: center;
         }
 
         .program-list {
             list-style: none;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: #555555;
         }
 
         .program-list li {
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             display: flex;
             justify-content: space-between;
         }
@@ -219,26 +223,26 @@
         }
 
         .gifts-text {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: #555555;
             text-align: center;
-            line-height: 1.5;
+            line-height: 1.4;
         }
 
         /* RSVP Formulář */
         .rsvp-form {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
 
         .rsvp-form input, .rsvp-form select {
             width: 100%;
-            padding: 10px 15px;
+            padding: 9px 12px;
             border: 1px solid #d5e1d7;
             border-radius: 6px;
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             background: #ffffff;
             color: #333333;
         }
@@ -251,14 +255,14 @@
         .rsvp-submit {
             background-color: #5c7462;
             color: #ffffff;
-            padding: 12px;
+            padding: 10px;
             border: none;
             border-radius: 6px;
             font-weight: 500;
             cursor: pointer;
             transition: background 0.3s ease;
-            font-size: 0.95rem;
-            margin-top: 5px;
+            font-size: 0.9rem;
+            margin-top: 4px;
         }
 
         .rsvp-submit:hover {
@@ -271,6 +275,7 @@
             font-weight: 500;
             text-align: center;
             padding: 10px;
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -278,6 +283,9 @@
 
     <!-- ================= 1. STRÁNKA: ÚVOD A PUZZLE ================= -->
     <div class="card-container" id="page-puzzle">
+        <!-- Horní květinová dekorace (můžete nahradit odkazem na váš obrázek květu) -->
+        <img src="https://raw.githubusercontent.com/sylvias-invites/puzzle/main/vetev-horni.png" alt="Květinová dekorace" class="floral-top" onerror="this.style.display='none'">
+        
         <h1>Lenka & Patrik</h1>
 
         <div class="puzzle-board" id="board">
@@ -289,13 +297,15 @@
 
         <p class="subtitle" id="subtitle-text">Slož puzzle a odhal tajemství</p>
 
-        <!-- Tlačítko pro přechod na další stránku -->
         <button id="btn-more" class="info-button" onclick="goToDetails()">Pro další informace klikněte sem</button>
     </div>
 
 
     <!-- ================= 2. STRÁNKA: DETAILY SVATBY ================= -->
     <div class="details-container hidden" id="page-details">
+        <!-- Horní květinová dekorace -->
+        <img src="https://raw.githubusercontent.com/sylvias-invites/puzzle/main/vetev-horni.png" alt="Květinová dekorace" class="floral-top" onerror="this.style.display='none'">
+
         <div class="details-header">
             <h2>Lenka & Patrik</h2>
             <div class="wedding-date">17. 09. 2027</div>
@@ -353,6 +363,9 @@
             </form>
             <div class="rsvp-success" id="rsvpSuccess">Děkujeme za vaši odpověď! Úspěšně uloženo.</div>
         </div>
+
+        <!-- Dolní květinová dekorace -->
+        <img src="https://raw.githubusercontent.com/sylvias-invites/puzzle/main/vetev-dolni.png" alt="Květinová dekorace" class="floral-bottom" onerror="this.style.display='none'">
     </div>
 
 
@@ -492,7 +505,7 @@
         // Odpočet do 17. září 2027 (11:00 dopoledne)
         const weddingDate = new Date("Sep 17, 2027 11:00:00").getTime();
 
-        const countdownTimer = setInterval(function() {
+        const countdownTimer = setInterval(function`{`
             const now = new Date().getTime();
             const distance = weddingDate - now;
 
@@ -507,7 +520,7 @@
 
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60 * 60)) / (1000 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
             document.getElementById("days").textContent = days;
@@ -516,7 +529,6 @@
             document.getElementById("seconds").textContent = seconds;
         }, 1000);
 
-        // Jednoduché zpracování RSVP formuláře (zatím ukáže děkovnou zprávu)
         function handleRSVP(event) {
             event.preventDefault();
             document.getElementById('rsvpForm').style.display = 'none';
