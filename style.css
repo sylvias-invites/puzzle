@@ -30,6 +30,7 @@ body {
 .details-container {
     width: 100%;
     max-width: 440px;
+    align-self: flex-start;
     text-align: center;
     background: #ffffff;
     padding: 0;
