@@ -1,0 +1,420 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    color: #111111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 0;
+}
+
+.card-container {
+    width: 100%;
+    max-width: 440px;
+    text-align: center;
+    background: #ffffff;
+    padding: 30px 0;
+    transition: opacity 0.5s ease;
+    position: relative;
+}
+
+.details-container {
+    width: 100%;
+    max-width: 440px;
+    text-align: center;
+    background: #ffffff;
+    padding: 0;
+    transition: opacity 0.5s ease;
+    position: relative;
+}
+
+.details-inner-padding {
+    padding: 0 5px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.floral-top, .floral-bottom {
+    width: 100%;
+    max-height: 70px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    opacity: 0.85;
+}
+
+.floral-top-center {
+    display: block;
+    width: 100%;
+    height: 90px;
+    object-fit: cover;
+    object-position: center;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+.floral-bottom {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    transform: scaleX(-1);
+}
+
+ .art-flower-large {
+    display: block;
+    width: 100%;
+    height: auto; /* Povolí přirozenou výšku podle poměru stran */
+    max-height: 250px; /* Tady si můžete nastavit maximální výšku, jakou chcete */
+    object-fit: contain;
+    opacity: 0.9;
+}
+
+
+h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.3rem;
+    font-weight: 600;
+    color: #4a5d4e;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+h3 {
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: #333333; 
+    margin-bottom: 20px;
+    font-weight: 300;
+    transition: opacity 0.4s ease, font-size 0.3s ease;
+}
+
+.subtitle.solved {
+    font-size: 1.4rem;
+    font-weight: 500;
+    font-family: 'Cormorant Garamond', serif;
+    color: #333333;
+}
+
+.puzzle-board {
+    display: grid;
+    grid-template-columns: repeat(2, 140px);
+    grid-template-rows: repeat(2, 140px);
+    gap: 4px;
+    justify-content: center;
+    margin: 15px auto 20px auto;
+    width: 284px;
+    height: 284px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.puzzle-piece {
+    width: 140px;
+    height: 140px;
+    cursor: pointer;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    border: 2px solid transparent;
+    background-image: url('snoubenci.png');
+    background-size: 280px 280px;
+    background-repeat: no-repeat;
+}
+
+.puzzle-piece.selected {
+    border-color: #8ab092;
+    transform: scale(0.96);
+}
+
+.info-button {
+    display: inline-block;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s ease, transform 0.3s ease;
+    transform: translateY(10px);
+    background-color: #5c7462;
+    color: #ffffff;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(92, 116, 98, 0.25);
+    cursor: pointer;
+    border: none;
+}
+
+.info-button.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.info-button:hover {
+    background-color: #4a5d4e;
+}
+
+.details-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.3rem;
+    font-weight: 600;
+    color: #4a5d4e;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+.welcome-msg {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.8rem;
+    color: black;
+    margin-bottom: 20px;
+    margin-top: 8px;
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+.couple-photo-wrapper {
+    width: 100%;
+    margin: 15px 0 25px 0;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.couple-photo {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    object-position: center;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+}
+
+.countdown-title {
+    font-size: 0.9rem;
+    color: #333333;
+    margin-bottom: 10px;
+    margin-top: 30px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.countdown-box {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.countdown-item {
+    background: #f4f7f4;
+    padding: 10px 12px;
+    border-radius: 8px;
+    min-width: 65px;
+    border: 1px solid #e2ebe3;
+}
+
+.countdown-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #333333;
+    display: block;
+}
+
+.countdown-label {
+    font-size: 0.7rem;
+    color: #666666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.program-free-section {
+    margin-bottom: 30px;
+    margin-top: 40px;
+    text-align: left;
+}
+
+.program-free-section h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    color: #4a5d4e;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.timeline {
+    position: relative;
+    max-width: 380px;
+    margin: 0 auto;
+    padding: 10px 0;
+}
+
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background-color: #000000;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1px;
+}
+
+.timeline-item {
+    padding: 12px 0;
+    position: relative;
+    width: 50%;
+}
+
+.timeline-item.left {
+    left: 0;
+    text-align: right;
+    padding-right: 20px;
+}
+
+.timeline-item.right {
+    left: 50%;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.timeline-item.left::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 12px;
+    height: 2px;
+    background-color: #5c7462;
+}
+
+.timeline-item.right::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 12px;
+    height: 2px;
+    background-color: #5c7462;
+}
+
+.timeline-content {
+    font-size: 0.9rem;
+    color: #000000;
+}
+
+.timeline-time {
+    font-weight: 600;
+    color: #5c7462;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.section-block {
+    margin-bottom: 25px;
+    text-align: left;
+    background: #fcfdfc;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #edf2ee;
+}
+
+.section-block h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: #4a5d4e;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #e2ebe3;
+    padding-bottom: 4px;
+    text-align: center;
+}
+
+.dresscode-content {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #000000;
+    line-height: 1.4;
+}
+
+.color-palette {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.color-circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid #d5e1d7;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.gifts-text {
+    font-size: 0.9rem;
+    color: #000000;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.rsvp-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.rsvp-form input, .rsvp-form select {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid #d5e1d7;
+    border-radius: 6px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    background: #ffffff;
+    color: #000000;
+}
+
+.rsvp-form input:focus, .rsvp-form select:focus {
+    outline: none;
+    border-color: #5c7462;
+}
+
+.rsvp-submit {
+    background-color: #5c7462;
+    color: #ffffff;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+
+.rsvp-submit:hover {
+    background-color: #4a5d4e;
+}
+
+.rsvp-success {
+    display: none;
+    color: #4a5d4e;
+    font-weight: 500;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9rem;
+}

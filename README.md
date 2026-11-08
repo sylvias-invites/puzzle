@@ -1,26 +1,39 @@
 # Interaktivní svatební pozvánka (Puzzle)
 
-Moderní a originální digitální svatební pozvánka postavená na interaktivní hře – skládání puzzle. Hosté musí před odhalením detailů o svatbě správně složit 4dílné puzzle s fotografií snoubenců.
+Digitální svatební pozvánka s úvodní hrou: hosté složí čtyřdílné puzzle a poté si mohou zobrazit informace o svatbě.
 
-## Vlastnosti
-- **Interaktivní minihra (2x2 puzzle):** Jednoduché prohazování dílků kliknutím, ideální pro mobilní zařízení.
-- **Dynamické oříznutí fotky:** Využívá jedinou zdrojovou fotku a CSS (`background-position`), takže odpadá nutnost ručního stříhání obrázků.
-- **Oslava po složení:** Automatické spuštění konfet (ve stylových eukalyptových barvách a tvarech) po úspěšném složení puzzle.
-- **Postupné odhalení:** Tlačítko pro další informace se uživateli zobrazí až po dokončení hry.
-- **Respektuje design:** Čistý, minimalistický vzhled s důrazem na eukalyptovou zelenou barvu a elegantní typografii.
+## Funkce
 
-## Jak spustit projekt lokálně
+- Puzzle 2 × 2 ovládané kliknutím, vhodné i pro dotyková zařízení.
+- Puzzle používá jednu fotografii a její výřezy zobrazuje pomocí CSS `background-position`.
+- Po složení puzzle se zobrazí animace konfet a tlačítko k informacím o svatbě.
+- Stránka s odpočtem do svatby, místem konání, programem, dress codem, informacemi o darech a formulářem RSVP.
 
-1. Klunuj si repozitář nebo stáhni soubory do počítače.
-2. Ujisti se, že ve stejné složce jako `index.html` máš připravenou fotku snoubenců pod názvem **`snoubenci.png`** (doporučený čtvercový formát, např. 600x600 px).
-3. Otevři soubor **`index.html`** v libovolném webovém prohlížeči.
+## Soubory projektu
+
+- `index.html` – obsah pozvánky.
+- `style.css` – vzhled a rozložení stránky.
+- `script.js` – logika puzzle, odpočtu, konfet a formuláře.
+- `snoubenci.png` – fotografie použitá v puzzle a v detailech pozvánky.
+- `artkytka.png`, `eukalyptus.png` – doplňkové obrázky.
+
+Všechny uvedené soubory ponechte ve stejné složce. Při výměně fotografie zachovejte název `snoubenci.png` včetně velikosti písmen.
+
+## Spuštění
+
+Otevřete složku projektu ve VS Code a spusťte `index.html` pomocí rozšíření Live Server nebo Live Preview. Případně lze soubor otevřít přímo v prohlížeči.
+
+Google Fonts a knihovna Canvas Confetti se načítají z internetu. Některé květinové dekorace se také načítají z externích odkazů, proto pro jejich zobrazení musí být dostupné připojení k internetu.
+
+## Úpravy
+
+- Jména, texty, datum svatby, program a další obsah upravte v `index.html`.
+- Barvy, rozměry a rozložení upravte v `style.css`.
+- Chování puzzle a odpočtu upravte v `script.js`.
+- Formulář RSVP nyní pouze zobrazí potvrzovací zprávu v prohlížeči; odpovědi se nikam neodesílají ani neukládají.
 
 ## Použité technologie
-- **HTML5 & CSS3** (Flexbox, CSS Grid)
-- **JavaScript (Vanilla)** (Logika prohazování dílků, ověření výhry, manipulace s DOM)
-- **Canvas Confetti** (Knihovna pro animaci konfet přes CDN)
-- **Google Fonts** (*Cormorant Garamond* & *Montserrat*)
 
-## Rychlé úpravy pro klienty
-- **Změna jmen a textů:** Upravíš přímo v HTML v sekci `<div class="card-container">`.
-- **Cíl tlačítka:** V HTML změň atribut `href="#dalsi-info"` u tlačítka na odkaz na RSVP formulář nebo detailní harmonogram.
+- HTML5, CSS3 a JavaScript bez frameworku.
+- [Canvas Confetti](https://www.npmjs.com/package/canvas-confetti) načítané z CDN.
+- Google Fonts: Cormorant Garamond, Great Vibes a Montserrat.
